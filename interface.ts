@@ -5,9 +5,8 @@ export interface ReservationItem {
   reservationDate: string,
   time: string,
   tel: string,
-  person: string,
-  createdAt: string,
-  __v: number
+  person: number,
+  createdAt: string
 }
 
 export interface RestaurantItem {
@@ -29,4 +28,18 @@ export interface RestaurantItem {
     data: RestaurantItem[],
     averageRating: number,
   }
+
+  export interface ReservationItem {
+    reservationDate: string,
+    name: string,
+    time: string,
+    person: number,
+    tel: string,
+    createdAt: string,
+  }
   
+  export interface ReservationJson {
+    success: boolean,
+    count: number,
+    data: ReservationItem[],
+  }

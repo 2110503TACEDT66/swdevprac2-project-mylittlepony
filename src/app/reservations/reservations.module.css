@@ -1,6 +1,96 @@
+.page {
+    align-items: center;
+    background-color: #171717;
+    height: 100vh;
+    width: 100vw;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+}
+
 .sectionlayout {
     display:flex;
-    flex-direction: row;
-    padding: 10px;
-    
+    flex-direction: row; 
 }
+.text {
+    font-family: "CanadianFB";
+    color: #F4D28F;
+    font-size: 40px;
+}
+
+.textWhite {
+    font-family: "CanadianFB";
+    color: white;
+    margin: 10px;
+    font-size: 40px;
+}
+
+.reserveButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 20px;
+    font-size: 15px;
+    padding: 3px 15px;
+    border-color: #F4D28F ;
+    color: #F4D28F;
+    border-radius: 3px;
+    border-width: 1.5px;
+}
+
+.reserveButton:hover {
+    background-color: #F4D28F;
+    border-radius: 6px;
+    color: whitesmoke;
+}
+
+.guestnum {
+    width: 100%;
+    color: white;
+    background-color: #171717; 
+    border: 1px solid #F4D28F; 
+    border-radius: 4px; 
+    padding: 8px;
+    outline: none;
+}
+
+.guestnum::placeholder {
+    color: white;
+}
+
+.inputField {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #F4D28F;
+    border-radius: 5px;
+    font-size: 16px;
+    align-self: center;
+    background-color: transparent;
+    color: white;
+    margin-right: 5px;
+}
+.inputField::placeholder {
+    color: white;
+}
+
+.inputFieldName {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #F4D28F;
+    border-radius: 5px;
+    font-size: 16px;
+    align-self: center;
+    background-color: transparent;
+    color: white;
+}
+.inputFieldName::placeholder {
+    color: white;
+}
+
+.inputField:focus,
+.inputFieldName:focus {
+    border-color: #F4D28F; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+    background-color: transparent;
+}
+

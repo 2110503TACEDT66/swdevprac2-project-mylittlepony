@@ -3,52 +3,119 @@ import { useState } from "react"
 import { DatePicker } from "@mui/x-date-pickers"
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Select , MenuItem, TextField, InputAdornment, FormControl, InputLabel, OutlinedInput } from '@mui/material'
+import { InputAdornment, FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { Dayjs } from "dayjs"
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import { AccessTime , LocalPhoneOutlined } from "@mui/icons-material"
+import styles from "./datereserve.module.css"
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { useSearchParams } from "next/navigation"
 
+export default function DateReserve() {
+    const [reservationDate, setReservationDate] = useState<Dayjs | null>(null);
 
-export default function DateReserve({onDateChange, onNameChange, onTimeChange, onTelChange, onPersonChange}
-    : {onDateChange:Function ,onTimeChange:Function,onNameChange:Function, onTelChange:Function, onPersonChange:Function}) {
     
-    const [bookDate, setBookDate ] = useState<Dayjs|null>(null)
-    const [name, setName] = useState<string|null>(null)
-    const [time, setTime] = useState<string|null>(null)
-    const [tel, setTel] = useState<string|null>(null)
-    const [person, setPerson] = useState<string|null>(null)
+    const addReservations = async (addReservationForm: FormData) => {
+        const formData = Object.fromEntries(addReservationForm.entries());
+
+        try {
+        } catch(error) {
+            console.error("Failed to add reservation:", error);
+        }
+    };
+
+
+    const urlParams = useSearchParams()
+    const restaurant = urlParams.get('restaurant')
     
     return(
-        <div className = "bg-slate-100 rounded-lg space-y-2 w-fit px-10 py-5 flex flex-col justify-center align-center">
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-    <InputLabel htmlFor="outlined-adornment-password">Name</InputLabel>
-    <OutlinedInput
-        value={name} 
-        onChange={(e)=>{setName(e.target.value); onNameChange(e.target.value)}}
-        endAdornment={
-            <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <AccountCircle/>
-            </InputAdornment>
-        }
-        label="Name"
-    />
-</FormControl>
+        
+        <div className = "space-y-2 w-fit px-10 py-5 flex flex-col justify-center align-center">
+        
+           {/* <div className="text-5xl text-center font-medium text-white">{restaurant}</div>
 
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker className="bg-white"
-                value={bookDate}
-                onChange={(value)=>{setBookDate(value); onDateChange(value)}}/>
-            </LocalizationProvider>
-            
-            <TextField name="Time" label="Time" variant="outlined" placeholder="Time" 
-            value={time} onChange={(e)=>{setTime(e.target.value); onTimeChange(e.target.value)}}></TextField>
+           <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                <InputLabel className="text-white" 
+                    sx={{ color: 'white', 
+                        '&.Mui-focused': {color: '#F4D28F',}
+                    }}
+                >Name</InputLabel>
+                <OutlinedInput required id="name" name="name" label="Name"
+                    sx={{'& fieldset': {borderColor: '#F4D28F !important', },
+                        '& .MuiOutlinedInput-input': {color: 'white', },
+                        '&::placeholder': { color: 'white', },
+                    }}
+                />
+            </FormControl>
 
-            <TextField name="Tel" label="Tel" variant="outlined" placeholder="Tel"
-            value={tel} onChange={(e)=>{setTel(e.target.value); onTelChange(e.target.value)}}></TextField>
+            <div className="flex"> */}
 
-            <TextField name="Person" label="Guest Number" variant="outlined" placeholder="Guest Number" 
-            value={person} onChange={(e)=>{setPerson(e.target.value); onPersonChange(e.target.value)}}></TextField>
+            <FormControl sx={{ m: 1, width: '35ch' }} variant="outlined">
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <DatePicker
+                        value={reservationDate}
+                        onChange={(value) => setReservationDate(value)}
+                        components={{
+                            OpenPickerIcon: () => <CalendarTodayIcon sx={{ color: 'white' }} />,
+                        }}
+                    />
+                </LocalizationProvider>
+            </FormControl>
+{/*             
+            <FormControl sx={{ m: 1, width: '35ch' }} variant="outlined">
+                <InputLabel className="text-white" 
+                    sx={{ color: 'white', 
+                        '&.Mui-focused': {color: '#F4D28F',}
+                    }}
+                >Time</InputLabel>
+                <OutlinedInput required id="time" name="time" label="Time"
+                    endAdornment={
+                        <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <AccessTime style={{ color: 'white' }} />
+                        </InputAdornment>
+                    }
+                    sx={{'& fieldset': {borderColor: '#F4D28F !important', },
+                        '& .MuiOutlinedInput-input': {color: 'white', },
+                        '&::placeholder': { color: 'white', },
+                    }}
+                />
+            </FormControl>
+
+            </div>
+
+            <div className="flex">
+
+      
+            <FormControl sx={{ m: 1, width: '35ch' }} variant="outlined">
+                    <input
+                        type="number"
+                        id="person"
+                        name="person"
+                        placeholder="Guest Number"
+                        className={styles.guestnum}
+                    />
+            </FormControl>
 
 
+            <FormControl sx={{ m: 1, width: '35ch' }} variant="outlined">
+                <InputLabel className="text-white" 
+                    sx={{ color: 'white', 
+                        '&.Mui-focused': {color: '#F4D28F',}
+                    }}
+                >Tel</InputLabel>
+                <OutlinedInput label="Tel" required id="tel" name="tel"
+                    endAdornment={
+                        <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <LocalPhoneOutlined style={{ color: 'white' }} />
+                        </InputAdornment>
+                    }
+                    sx={{'& fieldset': {borderColor: '#F4D28F !important', },
+                        '& .MuiOutlinedInput-input': {color: 'white', },
+                        '&::placeholder': { color: 'white', },
+                    }}
+                />
+            </FormControl>
+
+            </div> */}
             
         </div>
     )

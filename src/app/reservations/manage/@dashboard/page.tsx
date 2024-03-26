@@ -5,6 +5,9 @@ import Restaurant from "@/db/models/Restaurant"
 import { dbConnect } from "@/db/dbConnect"
 import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
+import { FormControl, InputAdornment, InputLabel, OutlinedInput } from "@mui/material"
+import { AccessTime, InsertLink, LocalPhoneOutlined } from "@mui/icons-material"
+import React from "react"
 
 export default async function DashboardPage() {
 
@@ -41,49 +44,92 @@ export default async function DashboardPage() {
     const profile = await getUserProfile(session.user.token)
 
     return (
-        <main className="bg-slate-100">
+        <main className="flex justify-center items-center h-full ">
             {
                 (profile.data.role == "admin")?
                 <form action={addRestaurant}>
-                    <div className="text-xl text-blue-700"> Create Restaurant Model</div>
-                    <div className="flex items-center w-1/2 my-2 ">
-                        <input type="text" required id="model" name="model" placeholder="Restaurant Name"
-                        className="bg-white border-2 border-gray-200 rounded w-full p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
-                    </div>
-
-                    <div className="flex items-center w-1/2 my-2 ">
-                        <input type="text" required id="desc" name="desc" placeholder="Address"
-                        className="bg-white border-2 border-gray-200 rounded w-full p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
-                    </div>
-
-                    <div className="flex items-center w-1/2 my-2 ">
-                        <input type="text" required id="picture" name="picture" placeholder="Picture URL"
-                        className="bg-white border-2 border-gray-200 rounded w-full p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
-                    </div>
-
                     
-                    <div className="flex items-center w-1/2 my-2 ">
-                        <input type="text" required id="dayRate" name="dayRate" placeholder="Phone Number"
-                        className="bg-white border-2 border-gray-200 rounded w-full p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
+                    <FormControl sx={{ m: 1, width: '100%', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Restaurant Name</InputLabel>
+                        <OutlinedInput label="Restaurant Name" required id="name" name="name"
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+                            
+                
+                    <FormControl sx={{ m: 1, width: '100%', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Address</InputLabel>
+                        <OutlinedInput label="Address" required id="address" name="address"
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+
+                    <div className="flex">
+      
+                    <FormControl sx={{ m: 1, width: '35ch', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Picture URL</InputLabel>
+                        <OutlinedInput label="Picture URL" required id="picture" name="picture"
+                            endAdornment={
+                                <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                    <InsertLink style={{ color: 'grey' }} />
+                                </InputAdornment>                                }
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '35ch', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Phone Number</InputLabel>
+                        <OutlinedInput label="Phone Number" required id="tel" name="tel"
+                            endAdornment={
+                                <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                    <LocalPhoneOutlined style={{ color: 'grey' }} />
+                                </InputAdornment>                                }
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+
+
                     </div>
 
-                    <div className="flex items-center w-1/2 my-2 ">
-                       <input type="number" required id="seats" name="seats" placeholder="Open Time"
-                        min={0} max={50}
-                        className="bg-white border-2 border-gray-200 rounded w-auto p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
-                        
-                       <input type="number" required id="doors" name="doors" placeholder="Close Time"
-                        min={0} max={8}
-                        className="bg-white border-2 border-gray-200 rounded w-auto p-2
-                        text-gray-700 focus:outline-none focus:border-blue-400 "/>
+                    <div className="flex">
+      
+                    <FormControl sx={{ m: 1, width: '35ch', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Open Time</InputLabel>
+                        <OutlinedInput label="Open Time" required id="opentime" name="opentime"
+                            endAdornment={
+                                <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                    <AccessTime style={{ color: 'grey' }} />
+                                </InputAdornment>                                }
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '35ch', backgroundColor: 'white' }} variant="outlined">
+                        <InputLabel sx={{ color: '#111113', opacity: 0.6, '&.Mui-focused': { color: 'gray' } }}
+                        >Close Time</InputLabel>
+                        <OutlinedInput label="Close Time" required id="closetime" name="closetime"
+                            endAdornment={
+                                <InputAdornment position="end" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                    <AccessTime style={{ color: 'grey' }} />
+                                </InputAdornment>                                }
+                            sx={{'& fieldset': {borderColor: '#D9D9D9 !important', },
+                            }}
+                        />
+                    </FormControl>
+
                     </div>
 
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded">Add New Restaurant</button>
+                    <button type="submit" className="bg-slate-950 hover:bg-slate-800 text-white p-2 rounded w-full">Add New Restaurant</button>
                 </form>
                 :null
             }
