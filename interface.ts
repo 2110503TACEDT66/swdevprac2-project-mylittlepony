@@ -1,8 +1,11 @@
 export interface ReservationItem {
   _id: string,
-  reservationDate: string,
-  user: string,
   restaurant: string,
+  user: string,
+  reservationDate: string,
+  time: string,
+  tel: string,
+  person: string,
   createdAt: string,
   __v: number
 }
@@ -27,10 +30,3 @@ export interface RestaurantItem {
     averageRating: number,
   }
   
-  export interface BookingItem {
-    name: string;
-    surname: string;
-    id: string;
-    hospital: string;
-    bookDate: string;
-  }
