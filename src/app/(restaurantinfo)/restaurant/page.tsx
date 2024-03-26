@@ -4,7 +4,7 @@ import { LinearProgress } from "@mui/material"
 import RestaurantCatalog from "@/components/RestaurantCatalog";
 import styles from "./page.module.css"
 
-export default async function Hospital() {
+export default async function Restaurant() {
 
     const restaurants = await getRestaurants()
 
@@ -16,3 +16,5 @@ export default async function Hospital() {
         </main>
     )
 }
+
+
