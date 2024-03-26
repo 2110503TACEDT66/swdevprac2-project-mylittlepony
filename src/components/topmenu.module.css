@@ -11,9 +11,10 @@
 .menucontainer {
     font-family: "CalifornianFB";
     color: whitesmoke;
-    background-color: #171717;
+    background-color: #120F0F;
     height: 65px;
     font-size: large;
+    font-weight: bold;
     position: fixed;
     top: 0px;
     left: 0px;
