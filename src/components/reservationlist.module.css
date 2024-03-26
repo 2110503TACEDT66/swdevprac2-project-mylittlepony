@@ -6,3 +6,20 @@
     justify-content: center; 
     flex-direction: column;
 }
+
+.reserveButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 20px;
+    font-size: 15px;
+    padding: 3px 15px;
+    border-color: #F4D28F ;
+    color: #F4D28F;
+    border-radius: 3px;
+    border-width: 1.5px;
+}
+
+.reserveButton:hover {
+    background-color: #F4D28F;
+    border-radius: 6px;
+    color: whitesmoke;
+}

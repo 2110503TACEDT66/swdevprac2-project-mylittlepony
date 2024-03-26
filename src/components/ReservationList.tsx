@@ -24,12 +24,10 @@ export default async function ReservationList({reservationsJson}: {reservationsJ
         :
         (
             reservationsItem.data.map((reservationItem: any) => (
-                <div className="bg-slate-200 rounded px-5 mx-5 py-2 my-2"
+                <div className="rounded px-5 mx-5 py-2 my-2 text-white border border-white"
                     key = { reservationItem.user }>
-                        <div className="text-md">Date: {reservationItem.reservationDate}</div>
-                        <div className="text-md">Time: {reservationItem.time} 
-                        </div>
-                        <div className="text-md">:Guest Number {reservationItem.person} 
+                        <div className="text-md">{reservationItem.reservationDate} | {reservationItem.time}</div> 
+                        <div className="text-md" style={{ borderTop: '1px solid white'  }}>{reservationItem.person} Person
                         </div>
                         <div className="text-md">Tel: {reservationItem.tel} 
                         </div>
