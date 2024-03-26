@@ -1,32 +1,32 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { BookingItem } from "../../../interface"
+import { ReservationItem } from "../../../interface"
 
-type BookState = {
-    bookItems: BookingItem[];
+type ReserveState = {
+    reserveItems: ReservationItem[];
 }
 
-const initialState: BookState = { bookItems:[] };
+const initialState: ReserveState = { reserveItems:[] };
 
-export const bookSlice = createSlice ({
-    name: "book",
+export const reservationSlice = createSlice ({
+    name: "cart",
     initialState,
     reducers: {
-        addBooking: (state, action:PayloadAction<BookingItem>) => {
-            const remainItems = state.bookItems.findIndex(obj => obj.id === action.payload.id);
+        addReservation: (state, action:PayloadAction<ReservationItem>) => {
+            const remainItems = state.reserveItems.findIndex(obj => obj.name === action.payload.name);
             
             if (remainItems !== -1) {
-                state.bookItems[remainItems] = action.payload;
+                state.reserveItems[remainItems] = action.payload;
             } else {
-                state.bookItems.push(action.payload);
+                state.reserveItems.push(action.payload);
             }
             
         },
-        removeBooking: (state, action: PayloadAction<string>) => {
-            state.bookItems = state.bookItems.filter(obj => obj.id !== action.payload);
+        removeReservation: (state, action: PayloadAction<string>) => {
+            state.reserveItems = state.reserveItems.filter(obj => obj.name !== action.payload);
         }
         
     }
 })
 
-export const { addBooking, removeBooking } = bookSlice.actions
-export default bookSlice.reducer
+export const { addReservation, removeReservation } = reservationSlice.actions
+export default reservationSlice.reducer

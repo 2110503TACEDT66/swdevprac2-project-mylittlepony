@@ -31,17 +31,14 @@ export default async function DashboardPage() {
         catch(error){
             console.log(error)
         }
-
         revalidateTag("restaurants")
         redirect("/restaurant")
         
     }
-
     const session = await getServerSession(authOptions)
     if(!session|| !session.user.token) return null
 
     const profile = await getUserProfile(session.user.token)
-
 
     return (
         <main className="bg-slate-100">
@@ -87,12 +84,9 @@ export default async function DashboardPage() {
                     </div>
 
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded">Add New Restaurant</button>
-                    
-
                 </form>
                 :null
             }
-
         </main>
     )
 }

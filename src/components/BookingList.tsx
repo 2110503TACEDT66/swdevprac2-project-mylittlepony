@@ -2,39 +2,36 @@
 import { useAppSelector } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/redux/store"
-import { removeBooking } from "@/redux/features/reservationSlice"
+import { removeReservation } from "@/redux/features/reservationSlice"
 
 export default function BookingList() {
     
-    const hospitalItems = useAppSelector( ( state )=> state.bookSlice.bookItems)
+    const restaurantItems = useAppSelector( ( state )=> state.reservationSlice.reserveItems)
     const dispatch = useDispatch<AppDispatch>()
 
-    if (hospitalItems.length === 0 ) {
-        
-    } 
     return (
         <>
-        { hospitalItems.length === 0 ? (
-            <div className="text-xl text-center">No Vaccine Booking  </div>
+        { restaurantItems.length === 0 ? (
+            <div className="text-xl text-center">No Table  </div>
         )
         :
         (
-            hospitalItems.map((bookItem) => (
+            restaurantItems.map((reservationItem) => (
                 <div className="bg-slate-200 rounded px-5 mx-5 py-2 my-2"
-                    key = { bookItem.name }>
+                    key = { reservationItem.name }>
                         <div className="text-md">
-                            Name: {bookItem.name}</div>
-                        <div className="text-md">Surname: {bookItem.surname} 
+                            Name: {reservationItem.name}</div>
+                        <div className="text-md">Date: {reservationItem.bookDate}</div>
+                        <div className="text-md">Time: {reservationItem.time} 
                         </div>
-                        <div className="text-md">Citizen ID: {bookItem.id} 
+                        <div className="text-md">:Guest Number {reservationItem.person} 
                         </div>
-                        <div className="text-md">Hospital:: {bookItem.hospital} 
+                        <div className="text-md">Tel: {reservationItem.tel} 
                         </div>
-                        <div className="text-md">Date: {bookItem.bookDate}</div>
-
+                    
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm"
-                        onClick={ ()=> dispatch(removeBooking(bookItem.id)) }>
-                        Remove from Booking
+                        onClick={ ()=> dispatch(removeReservation(reservationItem.name)) }>
+                        Cancel
                         </button>
                 </div>
             ))

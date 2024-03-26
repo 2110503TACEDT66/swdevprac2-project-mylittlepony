@@ -11,7 +11,8 @@ export default function Banner () {
     const router = useRouter()
 
     const { data: session } = useSession()
-
+    console.log(session?.user.token)
+    console.log(session)
     return (
         <div className={styles.banner} onClick={ () => {setIndex(index+1)} }>
             <Image src = {covers[index%4]}
@@ -27,7 +28,7 @@ export default function Banner () {
 
             {
                 session? <div className='z-30 absolute top-5 right-10 font-semibold text-cyan-800 text-xl'>
-                    Welcome {session.user?.name}</div>:null
+                    Welcome {session.user?.data.name}</div>:null
             }
 
             <button className="bg-white text-cyan-600 border border-cyan-600 right-0 
