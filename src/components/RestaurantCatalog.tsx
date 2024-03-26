@@ -24,6 +24,7 @@ export default async function RestaurantCatalog({restaurantsJson}: {restaurantsJ
                                 height={600} // Set a fixed height for large screens
                                 sizes="(max-width: 600px) 100vw, 80vw" // Adjust this according to your design
                                 objectFit="cover"
+                                loading="lazy"
                             />
                         </div>
                         <div className="text-base sm:text-lg md:text-2xl text-white flex-1">{restaurantItem.name}</div>

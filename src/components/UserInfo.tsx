@@ -1,13 +1,20 @@
 'use client'
 
+import Link from "next/link";
 import styles from "./banner.module.css"
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 
 export default function UserInfo() {
     const { data: session } = useSession()
 
     var createdAt = session?.user?.data?.createdAt ? new Date(session.user.data.createdAt) : null;
+
+    const handleSignOut = async () => {
+        await signOut({ redirect: false, callbackUrl: '/' });
+        window.location.href = 'http://localhost:3000/'
+    };
 
     return (
         <div>
@@ -24,6 +31,7 @@ export default function UserInfo() {
                         <tr><td>Member Since</td><td>{createdAt?.toString()}</td></tr>
                     </tbody></table>):(<div className="text-black md:text-xl">User is not logged in</div>)
                 }
+                <button className={styles.buttonField} onClick={() => handleSignOut()}>Sign Out</button>
             </div>
         </div>
     );

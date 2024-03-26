@@ -13,13 +13,12 @@ export default function TopMenu () {
             <div className={styles.containercenter}>
                 <TopMenuItem title="HOME" pageRef="/"/>
                 <TopMenuItem title="ABOUT US" pageRef="/"/>
-                <TopMenuItem title="RESERVE" pageRef="/"/>
-                <TopMenuItem title="MYPROFILE" pageRef="/myprofile"/>
+                <TopMenuItem title="RESERVE" pageRef="/myreservation"/>
             </div>
             <div className={styles.containerright}>
                 <TopMenuItem title="explore" pageRef="/restaurant" imgSrc="/img/explore.png"/>
                 {
-                    session?<TopMenuItem pageRef="/api/auth/signout" imgSrc="/img/user.png" title="user"/>:
+                    session?<TopMenuItem pageRef="/myprofile" imgSrc="/img/user.png" title="user"/>:
                     <TopMenuItem pageRef="/signin" imgSrc="/img/user.png" title="user"/>
                 }
                 {

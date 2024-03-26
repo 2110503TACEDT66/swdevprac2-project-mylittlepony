@@ -9,3 +9,5 @@ export default async function getRestaurants() {
     }
     return await response.json()
 }
+
+
