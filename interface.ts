@@ -34,3 +34,18 @@ export interface RestaurantItem {
     hospital: string;
     bookDate: string;
   }
+
+  export interface ReviewJson {
+    success: boolean,
+    rating: number,
+    pagination: Object,
+    data: ReviewItem[],
+  }
+
+  export interface ReviewItem {
+    id: string,
+    description : string,
+    restaurant : Object ,
+    rating : number,
+    createAt: Date,
+  }
