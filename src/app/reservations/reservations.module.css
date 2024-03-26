@@ -1,6 +1,50 @@
+.page {
+    align-items: center;
+    background-color: #171717;
+    height: 100vh;
+    width: 100vw;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+}
+
 .sectionlayout {
     display:flex;
-    flex-direction: row;
-    padding: 10px;
-    
+    flex-direction: row; 
+}
+.text {
+    font-family: "CanadianFB";
+    color: #F4D28F;
+    margin: 20px;
+}
+
+.reserveButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 20px;
+    font-size: 15px;
+    padding: 3px 15px;
+    border-color: #F4D28F ;
+    color: #F4D28F;
+    border-radius: 3px;
+    border-width: 1.5px;
+}
+
+.reserveButton:hover {
+    background-color: #F4D28F;
+    border-radius: 6px;
+    color: whitesmoke;
+}
+
+.guestnum {
+    width: 100%;
+    color: white;
+    background-color: #171717; 
+    border: 1px solid #F4D28F; 
+    border-radius: 4px; 
+    padding: 8px;
+    outline: none;
+}
+
+.guestnum::placeholder {
+    color: white;
 }

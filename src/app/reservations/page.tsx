@@ -1,70 +1,82 @@
 'use client'
-import DateReserve from "@/components/DateReserve";
-import { useDispatch } from "react-redux";
-import { addReservation } from "@/redux/features/reservationSlice";
+import { redirect} from "next/navigation";
+import styles from "./reservations.module.css"
+import { dbConnect } from "@/db/dbConnect";
+import Reservation from "@/db/models/Reservation";
+import { revalidateTag } from "next/cache";
+import getUserProfile from "@/libs/getUserProfile";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { DatePicker } from "@mui/x-date-pickers"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { InputAdornment, FormControl, InputLabel, OutlinedInput } from '@mui/material'
+import { AccessTime , LocalPhoneOutlined } from "@mui/icons-material"
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { useSearchParams } from "next/navigation"
+import { Dayjs } from "dayjs";
 import { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { AppDispatch } from "@/redux/store";
-import { ReservationItem } from "../../../interface";
-import { useSearchParams } from "next/navigation";
-import { create } from "domain";
+import DateReserve from "@/components/DateReserve";
+import { useSession } from "next-auth/react";
+import { constants } from "buffer";
+import session from "redux-persist/lib/storage/session";
 
+export default function ReservationPage () {
 
-export default function Reservation () {
+    const [reservationDate, setReservationDate] = useState<Dayjs|null>(null)
 
     const urlParams = useSearchParams()
+    const restaurantId = urlParams.get('id')
     const restaurant = urlParams.get('restaurant')
-    const _id = urlParams.get('_id')
-    const createdAt = urlParams.get('createdAt')
-    const __v = urlParams.get('__v')
+    const {data: session} = useSession()
+    const id = session?.user.data._id;
 
-    const dispatch = useDispatch<AppDispatch>()
-    
-    const makeReservation = () => {
-        if ( reservationDate && restaurant && user && tel && person && time && __v && createdAt && _id){
-            const item:ReservationItem = {
-                _id: _id,
-                user: user,
-                restaurant: restaurant,
-                tel: tel,
-                time: time,
-                person: person,
-                reservationDate: dayjs(reservationDate).format("YYYY/MM/DD"),
-                createdAt: createdAt,
-                __v: __v
+    const addReservations = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const addReservationForm = new FormData(e.currentTarget);
+        const name = addReservationForm.get("name")
+        const reservationDate = addReservationForm.get("reservationdate")
+        const time = addReservationForm.get("time")
+        const tel = addReservationForm.get("tel")
+        const person = addReservationForm.get("person")
+        const createdAt = new Date()
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/v1/restaurants/${restaurantId}/reservations`, {
+                method: "POST",
+                headers: {
+                    "authorization": `Bearer ${session?.user.token}`,
+                    "Content-Type" : "application/json",
+                },
+                body: JSON.stringify({reservationDate, id, name, restaurantId, time, person, tel, createdAt}),
+            })
+            if(!response.ok) {
+                throw new Error("Failed to make reserve")
             }
-            dispatch(addReservation(item))
+        }catch(error){
+            console.log(error)
         }
     }
-
-    const [reservationDate, setReservationDate ] = useState<Dayjs|null>(null)
-    const [user, setUser] = useState<string|null>(null)
-    const [time, setTime] = useState<string|null>(null)
-    const [tel, setTel] = useState<string|null>(null)
-    const [person, setPerson] = useState<string|null>(null)
-
-    
+ 
     return (
-        <main className="items-center flex flex-col bg-neutral-900 ">
-            <div className='text-center text-2xl font-bold font-sans'>
-                Table Reserve
-            </div>
-            <div className="text-xl font-medium">{restaurant}</div>
+        <main className={styles.page}>
+            <div>Reserve {restaurant}</div>
+            <form onSubmit={addReservations}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                    value={reservationDate}
+                    name="reservationdate"
+                    onChange={(value) => setReservationDate(value)}/>
+                </LocalizationProvider>
 
-            
-            <div className="w-fit space-y-2">
-                <DateReserve onDateChange={(value:Dayjs)=>{setReservationDate(value)}}
-                onNameChange={(value:string) => {setUser(value)}}
-                onTimeChange={(value:string) => {setTime(value)}}
-                onTelChange={(value:string) => {setTel(value)}}
-                onPersonChange={(value:string) => {setPerson(value)}}
-                 />
-            </div>
-            
-
-            <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm" name = "Book Table"
-            onClick={makeReservation}>
-                Reserve Table</button>
+                <input name="name"/>
+                <input name="time"/>
+                <input name="person"/>
+                <input name="tel"/>
+                <button type="submit" className={styles.reserveButton} name = "Book Table">
+                    Confirm
+                </button>
+            </form>
         </main>
     );
 }

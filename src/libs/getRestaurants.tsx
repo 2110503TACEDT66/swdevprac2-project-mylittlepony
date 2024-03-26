@@ -1,4 +1,3 @@
-
 export default async function getRestaurants() {
 
     await new Promise( (resolve)=>setTimeout(resolve, 1000) )

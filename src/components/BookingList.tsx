@@ -1,24 +1,29 @@
-'use client'
 import { useAppSelector } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/redux/store"
-import { removeReservation } from "@/redux/features/reservationSlice"
+import removeReservation from "@/libs/removeReservation"
+import getReservations from "@/libs/getReservations"
+import { getSession, useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
+import { ReservationJson } from "../../interface"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import CancelButton from "./CancelButton"
 
-export default function BookingList() {
+export default async function BookingList({reservationsJson}: {reservationsJson: ReservationJson}) {
     
-    const restaurantItems = useAppSelector( ( state )=> state.reservationSlice.reserveItems)
-    const dispatch = useDispatch<AppDispatch>()
+    const reservationsItem = await reservationsJson
 
     return (
         <>
-        { restaurantItems.length === 0 ? (
+        { reservationsItem.count === 0 ? (
             <div className="text-xl text-center">No Table  </div>
         )
         :
         (
-            restaurantItems.map((reservationItem) => (
+            reservationsItem.data.map((reservationItem: any) => (
                 <div className="bg-slate-200 rounded px-5 mx-5 py-2 my-2"
-                    key = { reservationItem._id }>
+                    key = { reservationItem.user }>
                         <div className="text-md">Date: {reservationItem.reservationDate}</div>
                         <div className="text-md">Time: {reservationItem.time} 
                         </div>
@@ -26,11 +31,7 @@ export default function BookingList() {
                         </div>
                         <div className="text-md">Tel: {reservationItem.tel} 
                         </div>
-                    
-                        <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm"
-                        onClick={ ()=> dispatch(removeReservation(reservationItem._id)) }>
-                        Cancel
-                        </button>
+                        <CancelButton reservationId={reservationItem._id}/>
                 </div>
             ))
         )}
