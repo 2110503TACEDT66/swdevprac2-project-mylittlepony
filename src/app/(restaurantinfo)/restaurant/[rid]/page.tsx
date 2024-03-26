@@ -8,17 +8,15 @@ import { Rating } from "@mui/material"
 export default async function HospitalDetailPage( {params} : {params: {rid:string}}) {
     
     const restaurantDetail = await getRestaurant(params.rid)
-    console.log(restaurantDetail.averageRating)
     return(
         <main className={styles.page}>
             <div className={styles.content}>
-                {/* <Image src = { restaurantDetail.data.picture } */}
-                <Image src = {'https://drive.google.com/uc?id=1dSQJh0-e83kq1k2nNeWgxDW6WltYcamm'}
+                <Image src = { await restaurantDetail.data.picture }
                 alt = 'Restaurant Image'
                 width={0}
                 height={0}
                 sizes = "100vw"
-                className="rounded-lg w-[50%]"/>
+                className="rounded-lg w-[30%]"/>
                 <div className={styles.text}>
                 <div className="text-3xl md:text-4xl lg:text-5xl my-1 md:my-2 lg:my-3">{ restaurantDetail.data.name } </div>
                 <div className="flex justify-left">

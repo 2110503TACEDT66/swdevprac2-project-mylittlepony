@@ -11,7 +11,7 @@ export interface RestaurantItem {
     _id: string,
     name: string,
     address: string,
-    // picture: string,
+    picture: string,
     tel: string,
     opentime: string,
     closetime: string,

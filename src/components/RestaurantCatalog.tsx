@@ -18,9 +18,7 @@ export default async function RestaurantCatalog({restaurantsJson}: {restaurantsJ
                 restaurants.data.map((restaurantItem: any) => (
                     <div className={styles.restaurant}>
                         <div className={styles.imageContainer}>
-                        {/* <Image src={restaurantItem.picture} alt={restaurantItem.name} layout="responsive" width={400} height={600} objectFit="cover"/> */}
-
-                            <Image src={'https://drive.google.com/uc?id=1kTUa-9g6QeeAcXRFX5P8Sj82_dnQniOE'} alt={restaurantItem.name}
+                        <Image src={restaurantItem.picture} alt={restaurantItem.name}
                                 layout="responsive"
                                 width={800} // Set a fixed width for large screens
                                 height={600} // Set a fixed height for large screens

@@ -19,7 +19,7 @@ export default function TopMenu () {
                 <TopMenuItem title="explore" pageRef="/restaurant" imgSrc="/img/explore.png"/>
                 {
                     session?<TopMenuItem pageRef="/api/auth/signout" imgSrc="/img/user.png" title="user"/>:
-                    <TopMenuItem pageRef="/api/auth/signin" imgSrc="/img/user.png" title="user"/>
+                    <TopMenuItem pageRef="/signin" imgSrc="/img/user.png" title="user"/>
                 }
                 {
                     session?<div>{session.user?.data.name}</div>:null
