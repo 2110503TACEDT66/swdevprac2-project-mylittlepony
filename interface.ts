@@ -1,21 +1,30 @@
-export interface HospitalItem {
+export interface ReservationItem {
+  _id: string,
+  reservationDate: string,
+  user: string,
+  restaurant: string,
+  createdAt: string,
+  __v: number
+}
+
+export interface RestaurantItem {
     _id: string,
     name: string,
     address: string,
-    district: string,
-    province: string,
-    postalcode: string,
+    // picture: string,
     tel: string,
-    picture: string,
+    opentime: string,
+    closetime: string,
     __v: number,
-    id: string
+    reservations: ReservationItem[]
   }
   
-  export interface HospitalJson {
+  export interface RestaurantJson {
     success: boolean,
     count: number,
     pagination: Object,
-    data: HospitalItem[]
+    data: RestaurantItem[],
+    averageRating: number,
   }
   
   export interface BookingItem {

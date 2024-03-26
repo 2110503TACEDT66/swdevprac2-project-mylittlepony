@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./banner.module.css"
+import Link from "next/link";
 
 export default function Banner () {
     return (
@@ -22,9 +23,11 @@ export default function Banner () {
                 <div className="text-sm md:text-base lg:text-lg text-white my-2">
                     Reserve your dining experiece
                 </div>
-                <button className={styles.bannerButton}>
-                    EXPLORE
-                </button>
+                <Link href="/restaurant">
+                    <button className={styles.bannerButton}>
+                        EXPLORE
+                    </button>
+                </Link>
             </div>
         </div>
     );

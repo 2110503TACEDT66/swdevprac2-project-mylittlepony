@@ -1,28 +1,37 @@
 import Image from "next/image"
 import getHospital from "@/libs/getRestaurant"
 import Link from "next/link"
+import getRestaurant from "@/libs/getRestaurant"
+import styles from './page.module.css'
+import { Rating } from "@mui/material"
 
-export default async function HospitalDetailPage( {params} : {params: {hid:string}}) {
+export default async function HospitalDetailPage( {params} : {params: {rid:string}}) {
     
-    const hospitalDetail = await getHospital(params.hid)
-   
+    const restaurantDetail = await getRestaurant(params.rid)
+    console.log(restaurantDetail.averageRating)
     return(
-        <main className="text-center p-5">
-            
-            <div className="flex flex-row my-5">
-                <Image src = { hospitalDetail.data.picture }
-                alt = 'Hospital Image'
+        <main className={styles.page}>
+            <div className={styles.content}>
+                {/* <Image src = { restaurantDetail.data.picture } */}
+                <Image src = {'https://drive.google.com/uc?id=1dSQJh0-e83kq1k2nNeWgxDW6WltYcamm'}
+                alt = 'Restaurant Image'
                 width={0}
                 height={0}
                 sizes = "100vw"
-                className="rounded-lg w-[30%]"/>
-                <div className="text-md mx-5 text-left"> { hospitalDetail.data.name } 
-                <div className="text-md mx-5">Address: { hospitalDetail.data.address } </div>
-                <div className="text-md mx-5">District: { hospitalDetail.data.district } </div>
-                <div className="text-md mx-5">Province: { hospitalDetail.data.province } </div>
-                <div className="text-md mx-5">PostalCode: { hospitalDetail.data.postalcode } </div>
-                <div className="text-md mx-5">Tel: { hospitalDetail.data.tel } </div>
-                
+                className="rounded-lg w-[50%]"/>
+                <div className={styles.text}>
+                <div className="text-3xl md:text-4xl lg:text-5xl my-1 md:my-2 lg:my-3">{ restaurantDetail.data.name } </div>
+                <div className="flex justify-left">
+                    <span className="mr-2">{restaurantDetail.averageRating}</span><Rating className="mb-3 md:mb-5 lg:mb-8" name="rating" defaultValue={restaurantDetail.averageRating} precision={0.1} readOnly />
+                </div>
+                <div className="text-sm md:text-base lg:text-lg my-1 md:my-3 lg:my-5">Address: { restaurantDetail.data.address } </div>
+                <div className="text-sm md:text-base lg:text-lg my-1 md:my-3 lg:my-5">Open-Close: {restaurantDetail.data.opentime} - {restaurantDetail.data.closetime}</div>
+                <div className="text-sm md:text-base lg:text-lg my-1 md:my-3 lg:my-5">Tel: { restaurantDetail.data.tel } </div>
+                <Link href={`/reservations?id=${params.rid}&restaurant=${restaurantDetail.data.name}`}>
+                    <button className={styles.infoButton}>
+                        RESERVE NOW
+                    </button>
+                </Link>
                 </div>
             </div>
             

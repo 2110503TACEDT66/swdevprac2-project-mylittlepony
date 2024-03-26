@@ -1,19 +1,18 @@
-import getHospitals from "@/libs/getRestaurants";
-import HospitalCatalog from "@/components/HospitalCatalog";
+import getRestaurants from "@/libs/getRestaurants";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material"
+import RestaurantCatalog from "@/components/RestaurantCatalog";
+import styles from "./page.module.css"
 
 export default async function Hospital() {
 
-    const hospitals = await getHospitals()
+    const restaurants = await getRestaurants()
 
     return (
-        <main className="text-center p-5">
-            <h1 className="text-xl font-medium"> Select Your Hospital</h1>
+        <main className={styles.page}>
             <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
-            <HospitalCatalog hospitalsJson={hospitals}/>
+                <RestaurantCatalog restaurantsJson={restaurants}/>
             </Suspense>
-            
         </main>
     )
 }
