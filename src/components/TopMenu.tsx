@@ -1,33 +1,30 @@
-import Image from "next/image";
-import styles from './topmenu.module.css'
-import TopMenuItem from './TopMenuItem';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { Link } from '@mui/material';
+'use client'
+import { useSession } from "next-auth/react";
+import TopMenuItem from "./TopMenuItem";
+import styles from "./topmenu.module.css"
 
-export default async function TopMenu() {
-    const session = await getServerSession(authOptions)
-    
+export default function TopMenu () {
+    const {data: session} = useSession()
     return (
-        <div className = {styles.menucontainer}>
-            <Image src={'/img/logo.png'} className={styles.logoimg} alt='logo'
-            width={0} height={0} sizes='100vh' />
-            <TopMenuItem title='Reservations' pageRef='/reservations'/>
-            <TopMenuItem title='My Reserve' pageRef='/myreservation'/>
-
-
-            <div className='flex flex-row absolute left-0 h-full'>
-            
-            {
-                session? <Link href="/api/auth/signout"><div className='flex items-center h-full px-2 text-cyan-600 text-sm'>
-                    Sign-Out of { session.user?.data.name}</div> </Link>
-                : <Link href="/api/auth/signin"><div className='flex items-center h-full px-2 text-cyan-600 text-sm'> 
-                Sign-In </div></Link>
-            }  
+        <div className={styles.menucontainer}>
+            <div className={styles.containerleft}>
+                <TopMenuItem title="MyLittlePony"/>
+            </div>
+            <div className={styles.containercenter}>
+                <TopMenuItem title="HOME" pageRef="/"/>
+                <TopMenuItem title="ABOUT US" pageRef="/"/>
+                <TopMenuItem title="RESERVE" pageRef="/"/>
+            </div>
+            <div className={styles.containerright}>
+                <TopMenuItem title="explore" pageRef="/restaurant" imgSrc="/img/explore.png"/>
+                {
+                    session?<TopMenuItem pageRef="/api/auth/signout" imgSrc="/img/user.png" title="user"/>:
+                    <TopMenuItem pageRef="/api/auth/signin" imgSrc="/img/user.png" title="user"/>
+                }
+                {
+                    session?<div>{session.user?.data.name}</div>:null
+                }
             </div>
         </div>
-    )
-
-
-
+    );
 }

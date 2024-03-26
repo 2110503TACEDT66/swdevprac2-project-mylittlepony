@@ -7,31 +7,38 @@ import dayjs, { Dayjs } from "dayjs";
 import { AppDispatch } from "@/redux/store";
 import { ReservationItem } from "../../../interface";
 import { useSearchParams } from "next/navigation";
+import { create } from "domain";
 
 
 export default function Reservation () {
 
     const urlParams = useSearchParams()
-    const restaurantname = urlParams.get('restaurant')
+    const restaurant = urlParams.get('restaurant')
+    const _id = urlParams.get('_id')
+    const createdAt = urlParams.get('createdAt')
+    const __v = urlParams.get('__v')
 
     const dispatch = useDispatch<AppDispatch>()
     
     const makeReservation = () => {
-        if ( bookDate && restaurantname && name && tel && person && time){
+        if ( reservationDate && restaurant && user && tel && person && time && __v && createdAt && _id){
             const item:ReservationItem = {
-                name: name,
-                restaurantname: restaurantname,
+                _id: _id,
+                user: user,
+                restaurant: restaurant,
                 tel: tel,
                 time: time,
                 person: person,
-                bookDate: dayjs(bookDate).format("YYYY/MM/DD")
+                reservationDate: dayjs(reservationDate).format("YYYY/MM/DD"),
+                createdAt: createdAt,
+                __v: __v
             }
             dispatch(addReservation(item))
         }
     }
 
-    const [bookDate, setBookDate ] = useState<Dayjs|null>(null)
-    const [name, setName] = useState<string|null>(null)
+    const [reservationDate, setReservationDate ] = useState<Dayjs|null>(null)
+    const [user, setUser] = useState<string|null>(null)
     const [time, setTime] = useState<string|null>(null)
     const [tel, setTel] = useState<string|null>(null)
     const [person, setPerson] = useState<string|null>(null)
@@ -42,12 +49,12 @@ export default function Reservation () {
             <div className='text-center text-2xl font-bold font-sans'>
                 Table Reserve
             </div>
-            <div className="text-xl font-medium">{restaurantname}</div>
+            <div className="text-xl font-medium">{restaurant}</div>
 
             
             <div className="w-fit space-y-2">
-                <DateReserve onDateChange={(value:Dayjs)=>{setBookDate(value)}}
-                onNameChange={(value:string) => {setName(value)}}
+                <DateReserve onDateChange={(value:Dayjs)=>{setReservationDate(value)}}
+                onNameChange={(value:string) => {setUser(value)}}
                 onTimeChange={(value:string) => {setTime(value)}}
                 onTelChange={(value:string) => {setTel(value)}}
                 onPersonChange={(value:string) => {setPerson(value)}}
@@ -55,7 +62,7 @@ export default function Reservation () {
             </div>
             
 
-            <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm" name = "Book Vaccine"
+            <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm" name = "Book Table"
             onClick={makeReservation}>
                 Reserve Table</button>
         </main>

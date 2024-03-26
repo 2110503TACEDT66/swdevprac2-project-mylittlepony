@@ -1,19 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet');
-
-.banner {
-    display: block;
-    padding: 5px;
-    margin: 0;
-    width: 100vw;
-    height: 80vh;
-    position: relative;
+.bannerText {
+    font-family: 'CalifornianFB';
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: hsl(40, 82%, 76%);
+    z-index: 30;
 }
 
-.bannerText {
-    font-family: 'Inter';
-    position: relative;
-    top: 130px;
-    z-index: 20;
-    text-align: center;
+.bannerButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 20px;
+    font-size: 8px;
+    padding: 3px 15px;
+    border-color: #F4D28F ;
+    border-radius: 3px;
+    border-width: 1.5px;
+}
+
+.bannerButton:hover {
+    background-color: #F4D28F;
+    border-radius: 6px;
     color: whitesmoke;
+}
+
+@media screen and (min-width: 768px) {
+    /* Large screens */
+    .bannerButton {
+        font-size: 12px;
+        border-width: 1.5px;
+        padding: 4px 20px; /* Increase padding for large screens */
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Extra-large screens */
+    .bannerButton {
+        font-size: 16px;
+        border-width: 2px;
+        padding: 5px 25px; /* Increase padding for extra-large screens */
+    }
 }

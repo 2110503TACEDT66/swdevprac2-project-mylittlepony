@@ -18,10 +18,8 @@ export default function BookingList() {
         (
             restaurantItems.map((reservationItem) => (
                 <div className="bg-slate-200 rounded px-5 mx-5 py-2 my-2"
-                    key = { reservationItem.name }>
-                        <div className="text-md">
-                            Name: {reservationItem.name}</div>
-                        <div className="text-md">Date: {reservationItem.bookDate}</div>
+                    key = { reservationItem._id }>
+                        <div className="text-md">Date: {reservationItem.reservationDate}</div>
                         <div className="text-md">Time: {reservationItem.time} 
                         </div>
                         <div className="text-md">:Guest Number {reservationItem.person} 
@@ -30,7 +28,7 @@ export default function BookingList() {
                         </div>
                     
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm"
-                        onClick={ ()=> dispatch(removeReservation(reservationItem.name)) }>
+                        onClick={ ()=> dispatch(removeReservation(reservationItem._id)) }>
                         Cancel
                         </button>
                 </div>

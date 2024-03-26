@@ -1,27 +1,32 @@
+export interface ReservationItem {
+  _id: string,
+  restaurant: string,
+  user: string,
+  reservationDate: string,
+  time: string,
+  tel: string,
+  person: string,
+  createdAt: string,
+  __v: number
+}
+
 export interface RestaurantItem {
     _id: string,
     name: string,
     address: string,
-    picture:string,
+    picture: string,
     tel: string,
-    opentime:string,
-    closetime:string,
+    opentime: string,
+    closetime: string,
     __v: number,
-    id: string
+    reservations: ReservationItem[]
   }
   
   export interface RestaurantJson {
     success: boolean,
     count: number,
     pagination: Object,
-    data: RestaurantItem[]
+    data: RestaurantItem[],
+    averageRating: number,
   }
   
-  export interface ReservationItem {
-    name: string;
-    tel: string;
-    restaurantname: string;
-    time: string;
-    person: string;
-    bookDate: string;
-  }

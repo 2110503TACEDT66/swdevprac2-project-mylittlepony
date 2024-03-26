@@ -12,7 +12,7 @@ export const reservationSlice = createSlice ({
     initialState,
     reducers: {
         addReservation: (state, action:PayloadAction<ReservationItem>) => {
-            const remainItems = state.reserveItems.findIndex(obj => obj.name === action.payload.name);
+            const remainItems = state.reserveItems.findIndex(obj => obj._id === action.payload._id);
             
             if (remainItems !== -1) {
                 state.reserveItems[remainItems] = action.payload;
@@ -22,7 +22,7 @@ export const reservationSlice = createSlice ({
             
         },
         removeReservation: (state, action: PayloadAction<string>) => {
-            state.reserveItems = state.reserveItems.filter(obj => obj.name !== action.payload);
+            state.reserveItems = state.reserveItems.filter(obj => obj._id !== action.payload);
         }
         
     }

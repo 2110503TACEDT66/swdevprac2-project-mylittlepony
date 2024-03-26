@@ -91,7 +91,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  margin-top: 50px;
+  margin-top: 65px;
 }
 
 a {
@@ -103,4 +103,30 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+@font-face {
+  font-family: 'CalifornianFB';
+  src: url('/font/CALIFB.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'CalifornianFB';
+  src: url('/font/CALIFR.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CalifornianFB';
+  src: url('/font/CALIFB.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CalifornianFB';
+  src: url('/font/CALIFB.TTF') format('truetype');
+  font-weight: normal;
+  font-style: italic;
 }

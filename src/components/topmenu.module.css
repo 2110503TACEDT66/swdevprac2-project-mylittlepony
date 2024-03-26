@@ -1,30 +1,50 @@
+.itemcontainer {
+    color: whitesmoke;
+}
+
+.itemcontainer:hover{
+    color: #F4D28F;
+    text-decoration: underline;
+    text-decoration-color: #F4D28F;
+}
+
 .menucontainer {
-    height: 50px;
-    background-color: white;
+    font-family: "CalifornianFB";
+    color: whitesmoke;
+    background-color: #120F0F;
+    height: 65px;
+    font-size: large;
+    font-weight: bold;
     position: fixed;
     top: 0px;
-    left:0px;
+    left: 0px;
     right: 0px;
     z-index: 30;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerleft {
+    position: absolute;
+    left: 13px;
+    text-align: left;
+}
+
+.containercenter {
+    text-align: center;
+    align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
-.logoimg{
-    height: 100%;
-    width: auto;
-}
-
-.itemcontainer {
-    width: 120px;
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10pt;
-    color: grey;
-    font-weight: bold;
+.containerright {
+    position: absolute;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    right: 13px;
+    text-align: right;
 }
