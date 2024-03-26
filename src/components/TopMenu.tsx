@@ -14,6 +14,7 @@ export default function TopMenu () {
                 <TopMenuItem title="HOME" pageRef="/"/>
                 <TopMenuItem title="ABOUT US" pageRef="/"/>
                 <TopMenuItem title="RESERVE" pageRef="/"/>
+                <TopMenuItem title="MYPROFILE" pageRef="/myprofile"/>
             </div>
             <div className={styles.containerright}>
                 <TopMenuItem title="explore" pageRef="/restaurant" imgSrc="/img/explore.png"/>
