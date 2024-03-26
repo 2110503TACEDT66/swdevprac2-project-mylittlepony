@@ -32,6 +32,11 @@ export default async function HospitalDetailPage( {params} : {params: {rid:strin
                         RESERVE NOW
                     </button>
                 </Link>
+                <Link href={`/reservations?id=${params.rid}&restaurant=${restaurantDetail.data.name}`}>
+                    <button className={styles.infoButton}>
+                        REVIEW
+                    </button>
+                </Link>
                 </div>
             </div>
             
