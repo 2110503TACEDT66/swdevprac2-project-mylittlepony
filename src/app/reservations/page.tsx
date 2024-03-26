@@ -1,12 +1,6 @@
 'use client'
 import { redirect} from "next/navigation";
 import styles from "./reservations.module.css"
-import { dbConnect } from "@/db/dbConnect";
-import Reservation from "@/db/models/Reservation";
-import { revalidateTag } from "next/cache";
-import getUserProfile from "@/libs/getUserProfile";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { DatePicker } from "@mui/x-date-pickers"
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -16,7 +10,8 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useSearchParams } from "next/navigation"
 import { Dayjs } from "dayjs";
 import { useState } from "react";
-import DateReserve from "@/components/DateReserve";
+import './DatePickerStyles.css';
+
 import { useSession } from "next-auth/react";
 import { constants } from "buffer";
 import session from "redux-persist/lib/storage/session";
@@ -60,8 +55,13 @@ export default function ReservationPage () {
  
     return (
         <main className={styles.page}>
-            <div>Reserve {restaurant}</div>
-            <form onSubmit={addReservations}>
+            <div className={styles.text}> Reserve Table </div>
+            <div className={styles.textWhite}>{restaurant}</div>
+            <form className='flex flex-col justify-evenly' onSubmit={addReservations}>
+                
+                <input className={styles.inputFieldName} name="name" placeholder="Name"/>
+                
+                <div className="flex ">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                     value={reservationDate}
@@ -69,10 +69,16 @@ export default function ReservationPage () {
                     onChange={(value) => setReservationDate(value)}/>
                 </LocalizationProvider>
 
-                <input name="name"/>
-                <input name="time"/>
-                <input name="person"/>
-                <input name="tel"/>
+                <input name="time" className={styles.inputField} placeholder="Time" />
+                
+
+                </div>
+
+                <div className="flex flex-row">
+                <input name="person" className={styles.inputField} type="number" min={1} max={15} placeholder="Guest Number"/>
+                <input name="tel" className={styles.inputField} placeholder="Telephone"/>
+                </div>
+                
                 <button type="submit" className={styles.reserveButton} name = "Book Table">
                     Confirm
                 </button>

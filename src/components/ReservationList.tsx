@@ -9,12 +9,14 @@ import { ReservationJson } from "../../interface"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import CancelButton from "./CancelButton"
+import styles from "./reservationlist.module.css"
 
-export default async function BookingList({reservationsJson}: {reservationsJson: ReservationJson}) {
+export default async function ReservationList({reservationsJson}: {reservationsJson: ReservationJson}) {
     
     const reservationsItem = await reservationsJson
 
     return (
+        <main className={styles.page}>
         <>
         { reservationsItem.count === 0 ? (
             <div className="text-xl text-center">No Table  </div>
@@ -36,5 +38,6 @@ export default async function BookingList({reservationsJson}: {reservationsJson:
             ))
         )}
         </>
+        </main>
     )
 }

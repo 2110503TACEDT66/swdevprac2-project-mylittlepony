@@ -1,4 +1,4 @@
-import BookingList from "@/components/BookingList"
+import BookingList from "@/components/ReservationList"
 import getReservations from "@/libs/getReservations"
 import { LinearProgress } from "@mui/material"
 import { getServerSession } from "next-auth"

@@ -15,7 +15,14 @@
 .text {
     font-family: "CanadianFB";
     color: #F4D28F;
-    margin: 20px;
+    font-size: 40px;
+}
+
+.textWhite {
+    font-family: "CanadianFB";
+    color: white;
+    margin: 10px;
+    font-size: 40px;
 }
 
 .reserveButton {
@@ -48,3 +55,42 @@
 .guestnum::placeholder {
     color: white;
 }
+
+.inputField {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #F4D28F;
+    border-radius: 5px;
+    font-size: 16px;
+    align-self: center;
+    background-color: transparent;
+    color: white;
+    margin-right: 5px;
+}
+.inputField::placeholder {
+    color: white;
+}
+
+.inputFieldName {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #F4D28F;
+    border-radius: 5px;
+    font-size: 16px;
+    align-self: center;
+    background-color: transparent;
+    color: white;
+}
+.inputFieldName::placeholder {
+    color: white;
+}
+
+.inputField:focus,
+.inputFieldName:focus {
+    border-color: #F4D28F; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+    background-color: transparent;
+}
+
