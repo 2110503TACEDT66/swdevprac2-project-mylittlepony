@@ -43,3 +43,16 @@ export interface RestaurantItem {
     count: number,
     data: ReservationItem[],
   }
+
+  export interface ReviewItem {
+    _id: string,
+    rating: number,
+    description: string,
+    user: string,
+    restaurant: string,
+    createdAt: string
+  }
+  export interface ReviewJson {
+    success: boolean,
+    data: ReviewItem[],
+  }
